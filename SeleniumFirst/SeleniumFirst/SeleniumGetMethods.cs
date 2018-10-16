@@ -8,25 +8,31 @@ using System.Threading.Tasks;
 
 namespace SeleniumFirst
 {
-    class SeleniumGetMethods
+    public static class SeleniumGetMethods
     {
 
-        public static string GetText( string element, PropertyType elementype)
+        public static string GetText(this IWebElement element)
         {
-            if (elementype == PropertyType.Id)
-                return PropertiesCollections._driver.FindElement(By.Id(element)).GetAttribute("value");
-            if (elementype == PropertyType.Name)
-                return PropertiesCollections._driver.FindElement(By.Name(element)).GetAttribute("value");
-            else return String.Empty;
+
+            return element.GetAttribute("value");
+
+            //if (elementype == propertytype.id)
+            //    return propertiescollections._driver.findelement(by.id(element)).getattribute("value");
+            //if (elementype == propertytype.name)
+            //    return propertiescollections._driver.findelement(by.name(element)).getattribute("value");
+            //else return string.empty;
         }
 
-        public static string GetTextDDL(string element, PropertyType elementype)
+        public static string GetTextDDL(this IWebElement element)
         {
-            if (elementype == PropertyType.Id)
-                return new SelectElement(PropertiesCollections._driver.FindElement(By.Id(element))).AllSelectedOptions.SingleOrDefault().Text;
-            if (elementype == PropertyType.Name)
-                return new SelectElement(PropertiesCollections._driver.FindElement(By.Name(element))).AllSelectedOptions.SingleOrDefault().Text;
-            else return String.Empty;
+            return new SelectElement(element).AllSelectedOptions.SingleOrDefault().Text;
+                
+            //if (elementype == PropertyType.Id)
+            //    return new SelectElement(PropertiesCollections._driver.FindElement(By.Id(element))).AllSelectedOptions.SingleOrDefault().Text;
+            //if (elementype == PropertyType.Name)
+            //    return new SelectElement(PropertiesCollections._driver.FindElement(By.Name(element))).AllSelectedOptions.SingleOrDefault().Text;
+            //else return String.Empty;
+
         }
     }
 }
